@@ -1,4 +1,4 @@
-package com.refactify
+package com.refactify.integration
 
 import com.refactify.utils.ElasticsearchInstance
 import org.elasticsearch.action.search.SearchResponse
@@ -8,12 +8,14 @@ import spock.lang.Specification
 
 import java.nio.file.Paths
 
-class GamesITCase extends Specification {
+class PeopleITCase extends Specification {
     @Shared
     ElasticsearchInstance instance
 
     def setupSpec() {
         instance = new ElasticsearchInstance()
+        instance.createIndex("people", "people", Paths.get(System.getProperty("es.mapping.path"), "people.json"))
+        instance.createIndex("games", "games", Paths.get(System.getProperty("es.mapping.path"), "games.json"))
         instance.seedTestData("people", "people", Paths.get(System.getProperty("es.data.path"), "test-people.json"))
         instance.seedTestData("games", "games", Paths.get(System.getProperty("es.data.path"), "test-games.json"))
     }
@@ -22,18 +24,18 @@ class GamesITCase extends Specification {
         instance.cleanup()
     }
 
-    def "can fetch from games"() {
+    def "can fetch from people"() {
         given:
         Client client = instance.getClient()
 
         when:
-        SearchResponse response = client.prepareSearch("games")
-                .setTypes("games")
+        SearchResponse response = client.prepareSearch("people")
+                .setTypes("people")
                 .execute()
                 .actionGet()
 
         then:
         println response
-        response.getHits().totalHits() == 3
+        response.getHits().totalHits() == 1
     }
 }
