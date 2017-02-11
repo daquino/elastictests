@@ -1,0 +1,10 @@
+[{
+  "_index": "people",
+  "_type": "people",
+  "_id": "1",
+  "_source": {
+    "name": "Daniel Aquino",
+    "age": 31,
+    "favorite_games": ["Hearthstone", "Rocket League", "Final Fantasy 6"]
+  }
+}]

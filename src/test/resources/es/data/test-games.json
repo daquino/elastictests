@@ -1,0 +1,28 @@
+[{
+  "_index": "games",
+  "_type": "games",
+  "_id": "1",
+  "_source": {
+    "title": "Hearthstone",
+    "price": 0.00,
+    "company": "Blizzard"
+  }
+},{
+  "_index": "games",
+  "_type": "games",
+  "_id": "2",
+  "_source": {
+    "title": "Rocket League",
+    "price": 14.99,
+    "company": "Psyonix"
+  }
+},{
+  "_index": "games",
+  "_type": "games",
+  "_id": "3",
+  "_source": {
+    "title": "Final Fantasy 6",
+    "price": 9.99,
+    "company": "Squaresoft"
+  }
+}]
