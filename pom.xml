@@ -13,8 +13,8 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <spock.version>1.0-groovy-2.4</spock.version>
-        <groovy.version>2.4.1</groovy.version>
-        <cglib.version>3.1</cglib.version>
+        <groovy.version>2.4.6</groovy.version>
+        <cglib.version>3.2.4</cglib.version>
         <jackson.version>2.7.0</jackson.version>
         <lucene.version>5.4.1</lucene.version>
         <jsr.166e.version>1.1.0</jsr.166e.version>
@@ -152,11 +152,6 @@
         <testSourceDirectory>src/test/groovy</testSourceDirectory>
         <plugins>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-clean-plugin</artifactId>
-                <version>2.4.1</version>
-            </plugin>
-            <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.3</version>
                 <configuration>
@@ -178,13 +173,28 @@
                 </dependencies>
             </plugin>
             <plugin>
+                <groupId>org.eclipse.m2e</groupId>
+                <artifactId>lifecycle-mapping</artifactId>
+                <version>1.0.0</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>2.1</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-clean-plugin</artifactId>
+                <version>2.4.1</version>
+            </plugin>
+            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.16</version>
                 <configuration>
                     <excludes>
-                        <exclude>**/*IT.groovy</exclude>
-                        <exclude>**/*IT.java</exclude>
+                        <exclude>**/*ITCase.groovy</exclude>
+                        <exclude>**/*ITCase.java</exclude>
                     </excludes>
                 </configuration>
             </plugin>
@@ -211,6 +221,16 @@
                         <es.home.path>${project.basedir}/target/es-home</es.home.path>
                     </systemPropertyVariables>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>2.4</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>1.7</version>
             </plugin>
         </plugins>
     </build>

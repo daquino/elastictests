@@ -1,4 +1,4 @@
-package com.refactify.integration
+package com.refactify.integration.people
 
 import com.refactify.utils.ElasticsearchInstance
 import org.elasticsearch.action.search.SearchResponse
@@ -13,6 +13,7 @@ class PeopleITCase extends Specification {
     ElasticsearchInstance instance
 
     def setupSpec() {
+        println "Setting up in peopleit"
         instance = new ElasticsearchInstance()
         instance.createIndex("people", "people", Paths.get(System.getProperty("es.mapping.path"), "people.json"))
         instance.createIndex("games", "games", Paths.get(System.getProperty("es.mapping.path"), "games.json"))
