@@ -13,7 +13,6 @@ class GamesITCase extends Specification {
     ElasticsearchInstance instance
 
     def setupSpec() {
-        println "Setting up in gamesit"
         instance = new ElasticsearchInstance()
         instance.seedTestData("people", "people", Paths.get(System.getProperty("es.data.path"), "test-people.json"))
         instance.seedTestData("games", "games", Paths.get(System.getProperty("es.data.path"), "test-games.json"))

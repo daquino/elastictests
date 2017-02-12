@@ -5,9 +5,7 @@ import org.elasticsearch.action.admin.indices.delete.DeleteIndexRequest
 import org.elasticsearch.action.bulk.BulkRequestBuilder
 import org.elasticsearch.action.bulk.BulkResponse
 import org.elasticsearch.client.Client
-import org.elasticsearch.client.transport.TransportClient
 import org.elasticsearch.common.settings.Settings
-import org.elasticsearch.common.transport.InetSocketTransportAddress
 import org.elasticsearch.node.Node
 import org.elasticsearch.node.NodeBuilder
 
@@ -30,23 +28,13 @@ class ElasticsearchInstance {
                 .put("path.data", esHome)
                 .put("path.work", esHome)
                 .put("path.logs", esHome)
-                .put("network.host", "localhost")
-                .put("http.port", "9206")
-                .put("transport.tcp.port", "9306")
-                .put("discovery.zen.ping.multicast.enabled", "false")
                 .build()
         node = NodeBuilder.nodeBuilder()
                 .settings(settings)
                 .local(false)
                 .clusterName("es-test")
                 .node()
-        Settings transportSettings = Settings.settingsBuilder().
-                put("cluster.name", "es-test")
-                .build()
-        client = TransportClient.builder()
-                .settings(transportSettings)
-                .build()
-        client.addTransportAddress(new InetSocketTransportAddress(InetAddress.getByName("localhost"), 9306))
+        client = node.client()
         indicesCreated = [] as Set
     }
 
