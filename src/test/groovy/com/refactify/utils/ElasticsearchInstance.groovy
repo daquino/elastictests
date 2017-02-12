@@ -5,11 +5,10 @@ import org.elasticsearch.action.admin.indices.delete.DeleteIndexRequest
 import org.elasticsearch.action.bulk.BulkRequestBuilder
 import org.elasticsearch.action.bulk.BulkResponse
 import org.elasticsearch.client.Client
-import org.elasticsearch.client.transport.TransportClient
 import org.elasticsearch.common.settings.Settings
 import org.elasticsearch.common.transport.InetSocketTransportAddress
 import org.elasticsearch.node.Node
-import org.elasticsearch.node.NodeBuilder
+import org.elasticsearch.transport.client.PreBuiltTransportClient
 
 import javax.json.Json
 import javax.json.JsonArray
@@ -24,35 +23,27 @@ class ElasticsearchInstance {
 
     ElasticsearchInstance() {
         String esHome = System.getProperty("es.home.path")
-        Settings settings = Settings.settingsBuilder()
+        Settings settings = Settings.builder()
                 .put("path.home", esHome)
                 .put("path.conf", esHome)
                 .put("path.data", esHome)
-                .put("path.work", esHome)
                 .put("path.logs", esHome)
                 .put("network.host", "localhost")
                 .put("http.port", "9206")
+                .put("transport.type", "local")
+                .put("http.enabled", "false")
                 .put("transport.tcp.port", "9306")
-                .put("discovery.zen.ping.multicast.enabled", "false")
+                .put("cluster.name", "es-test")
                 .build()
-        node = NodeBuilder.nodeBuilder()
-                .settings(settings)
-                .local(false)
-                .clusterName("es-test")
-                .node()
-        Settings transportSettings = Settings.settingsBuilder().
-                put("cluster.name", "es-test")
-                .build()
-        client = TransportClient.builder()
-                .settings(transportSettings)
-                .build()
-        client.addTransportAddress(new InetSocketTransportAddress(InetAddress.getByName("localhost"), 9306))
+        node = new Node(settings)
+        node.start()
+        client = node.client()
         indicesCreated = [] as Set
     }
 
     void createIndex(final String indexName, final String type, Path mappingPath) {
         JsonObject mapping = Json.createReader(Files.newInputStream(mappingPath, StandardOpenOption.READ)).readObject()
-        Settings indexSettings = Settings.settingsBuilder()
+        Settings indexSettings = Settings.builder()
                 .put("number_of_shards", 1)
                 .put("number_of_replicas", 0)
                 .build()

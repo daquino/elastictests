@@ -16,16 +16,17 @@
         <groovy.version>2.4.6</groovy.version>
         <cglib.version>3.2.4</cglib.version>
         <jackson.version>2.7.0</jackson.version>
-        <lucene.version>5.5.2</lucene.version>
+        <lucene.version>6.4.0</lucene.version>
         <jsr.166e.version>1.1.0</jsr.166e.version>
         <tdigest.version>3.1</tdigest.version>
         <netty.version>3.10.5.Final</netty.version>
         <ning.version>1.0.2</ning.version>
         <jna.version>4.3.0</jna.version>
         <mustache.version>0.9.2</mustache.version>
-        <es.version>2.4.3</es.version>
+        <es.version>5.2.0</es.version>
         <javax.json.version>1.0</javax.json.version>
         <glassfish.json.version>1.0.4</glassfish.json.version>
+        <log4j.version>2.7</log4j.version>
     </properties>
 
     <dependencies>
@@ -137,6 +138,12 @@
             <scope>test</scope>
         </dependency>
         <dependency>
+            <groupId>org.elasticsearch.client</groupId>
+            <artifactId>transport</artifactId>
+            <version>${es.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
             <groupId>javax.json</groupId>
             <artifactId>javax.json-api</artifactId>
             <version>${javax.json.version}</version>
@@ -145,6 +152,11 @@
             <groupId>org.glassfish</groupId>
             <artifactId>javax.json</artifactId>
             <version>${glassfish.json.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>${log4j.version}</version>
         </dependency>
     </dependencies>
     <build>
