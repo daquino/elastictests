@@ -6,9 +6,7 @@ import org.elasticsearch.action.bulk.BulkRequestBuilder
 import org.elasticsearch.action.bulk.BulkResponse
 import org.elasticsearch.client.Client
 import org.elasticsearch.common.settings.Settings
-import org.elasticsearch.common.transport.InetSocketTransportAddress
 import org.elasticsearch.node.Node
-import org.elasticsearch.transport.client.PreBuiltTransportClient
 
 import javax.json.Json
 import javax.json.JsonArray
@@ -29,10 +27,8 @@ class ElasticsearchInstance {
                 .put("path.data", esHome)
                 .put("path.logs", esHome)
                 .put("network.host", "localhost")
-                .put("http.port", "9206")
                 .put("transport.type", "local")
                 .put("http.enabled", "false")
-                .put("transport.tcp.port", "9306")
                 .put("cluster.name", "es-test")
                 .build()
         node = new Node(settings)
