@@ -31,7 +31,7 @@ class ElasticsearchInstance {
                 .build()
         node = NodeBuilder.nodeBuilder()
                 .settings(settings)
-                .local(false)
+                .local(true)
                 .clusterName("es-test")
                 .node()
         client = node.client()
