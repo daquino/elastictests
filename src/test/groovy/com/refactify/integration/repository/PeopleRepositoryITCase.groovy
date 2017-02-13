@@ -8,7 +8,7 @@ import spock.lang.Specification
 
 import java.nio.file.Paths
 
-class PeopleRepositoryTest extends Specification {
+class PeopleRepositoryITCase extends Specification {
     @Shared
     PeopleRepository repository
 
