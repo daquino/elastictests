@@ -33,7 +33,7 @@ class PeopleRepositoryTest extends Specification {
         String id = "1"
 
         when:
-        Person person = repository.find(id);
+        Person person = repository.find(id)
 
         then:
         person.name == "Daniel Aquino"
